@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
@@ -27,30 +28,20 @@ public class SpringSecurityConfig {
     private JwtAuthFilter authFilter;
     @Autowired
     private AppUserRepo appUserRepo;
-
-    @Bean
-    //authentication
-    public UserDetailsService userDetailsService() {
-
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return appUserRepo.findByEmail(username).orElseThrow();
-
-            }
-        };
-    }
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-         return  http.csrf(AbstractHttpConfigurer::disable)
+        return http.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/unprotected/**","/auth/**").permitAll()
+                        .requestMatchers("/unprotected/**", "/auth/**").permitAll()
                         .anyRequest().authenticated()
                 ).authenticationProvider(authenticationProvider())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                  .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                 .build();
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+
+                .build();
 //        return http.csrf().disable()
 //                .authorizeHttpRequests()
 //                .requestMatchers("/products/new","/products/authenticate").permitAll()
@@ -71,12 +62,13 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

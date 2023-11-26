@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ping")
+@RequestMapping
 public class PingController {
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String pingController(){
         return "HelloPravin";
+    }
+    @GetMapping("protected/hello")
+    public String pingControllerAuth(){
+        return "HelloPravinPro";
     }
 }
