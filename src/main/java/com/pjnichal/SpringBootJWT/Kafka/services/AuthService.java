@@ -1,6 +1,6 @@
 package com.pjnichal.SpringBootJWT.Kafka.services;
 
-import com.pjnichal.SpringBootJWT.Kafka.entity.AppRole;
+import com.pjnichal.SpringBootJWT.Kafka.constants.AppRole;
 import com.pjnichal.SpringBootJWT.Kafka.entity.AppUser;
 import com.pjnichal.SpringBootJWT.Kafka.exceptions.UserAlreadyExists;
 import com.pjnichal.SpringBootJWT.Kafka.exceptions.UserNotFound;

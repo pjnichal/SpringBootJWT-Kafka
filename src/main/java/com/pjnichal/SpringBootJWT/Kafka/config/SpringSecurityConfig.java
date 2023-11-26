@@ -35,7 +35,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/unprotected/**", "/auth/**").permitAll()
+                        .requestMatchers("/unprotected/**", "/auth/**").permitAll().requestMatchers("/protected/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 ).authenticationProvider(authenticationProvider())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

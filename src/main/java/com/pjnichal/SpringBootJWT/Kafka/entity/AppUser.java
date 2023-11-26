@@ -1,5 +1,6 @@
 package com.pjnichal.SpringBootJWT.Kafka.entity;
 
+import com.pjnichal.SpringBootJWT.Kafka.constants.AppRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
