@@ -14,7 +14,7 @@ public class PingController {
     }
     @GetMapping("protected/hello")
     public String pingControllerAuth(){
-        return "HelloProtectedUser";
+        return "HelloProtectedUsers";
     }
     @GetMapping("protected/admin/hello")
     public String adminControllerAuth(){
