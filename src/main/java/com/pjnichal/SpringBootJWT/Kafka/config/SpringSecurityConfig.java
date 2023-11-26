@@ -42,18 +42,7 @@ public class SpringSecurityConfig {
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .build();
-//        return http.csrf().disable()
-//                .authorizeHttpRequests()
-//                .requestMatchers("/products/new","/products/authenticate").permitAll()
-//                .and()
-//                .authorizeHttpRequests().requestMatchers("/products/**")
-//                .authenticated().and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authenticationProvider(authenticationProvider())
-//                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-//                .build();
+
     }
 
     @Bean
