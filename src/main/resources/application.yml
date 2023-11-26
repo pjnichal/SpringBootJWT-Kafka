@@ -1,0 +1,10 @@
+spring:
+  datasource:
+      url: "jdbc:mysql://mysql.stackalpha.tech:3306/pravin_s68EyCeY5"
+      password: "52-VsSDc{$>U.uNz9~{<"
+      username: "nichal_orkYvcrOJ"
+      driver-class-name: "com.mysql.cj.jdbc.Driver"
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
